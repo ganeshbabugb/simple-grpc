@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package todo.v1;
+
+option go_package = "github.com/ganeshbabugb/todo-grpc/api/todo/v1;todov1";
+
+// The Todo item message
+message Todo {
+  string id = 1;
+  string title = 2;
+  string description = 3;
+  bool completed = 4;
+}
+
+// Request to create a new Todo
+message CreateTodoRequest {
+  string title = 1;
+  string description = 2;
+}
+
+// Response for creating a Todo
+message CreateTodoResponse {
+  Todo todo = 1;
+}
+
+// Request to get a Todo by ID
+message GetTodoRequest {
+  string id = 1;
+}
+
+// Response for getting a Todo
+message GetTodoResponse {
+  Todo todo = 1;
+}
+
+// Request to update a Todo
+message UpdateTodoRequest {
+  Todo todo = 1;
+}
+
+// Response for updating a Todo
+message UpdateTodoResponse {
+  Todo todo = 1;
+}
+
+// Request to delete a Todo
+message DeleteTodoRequest {
+  string id = 1;
+}
+
+// Response for deleting a Todo
+message DeleteTodoResponse {
+  bool success = 1;
+}
+
+// Todo service definition
+service TodoService {
+  rpc CreateTodo (CreateTodoRequest) returns (CreateTodoResponse);
+  rpc GetTodo (GetTodoRequest) returns (GetTodoResponse);
+  rpc UpdateTodo (UpdateTodoRequest) returns (UpdateTodoResponse);
+  rpc DeleteTodo (DeleteTodoRequest) returns (DeleteTodoResponse);
+}
