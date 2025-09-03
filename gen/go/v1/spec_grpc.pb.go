@@ -86,7 +86,7 @@ func (c *todoServiceClient) DeleteTodo(ctx context.Context, in *DeleteTodoReques
 }
 
 // TodoServiceServer is the server API for TodoService service.
-// All implementations must embed UnimplementedTodoServiceServer
+// All implementations should embed UnimplementedTodoServiceServer
 // for forward compatibility.
 //
 // Todo service definition
@@ -95,10 +95,9 @@ type TodoServiceServer interface {
 	GetTodo(context.Context, *GetTodoRequest) (*GetTodoResponse, error)
 	UpdateTodo(context.Context, *UpdateTodoRequest) (*UpdateTodoResponse, error)
 	DeleteTodo(context.Context, *DeleteTodoRequest) (*DeleteTodoResponse, error)
-	mustEmbedUnimplementedTodoServiceServer()
 }
 
-// UnimplementedTodoServiceServer must be embedded to have
+// UnimplementedTodoServiceServer should be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
@@ -117,8 +116,7 @@ func (UnimplementedTodoServiceServer) UpdateTodo(context.Context, *UpdateTodoReq
 func (UnimplementedTodoServiceServer) DeleteTodo(context.Context, *DeleteTodoRequest) (*DeleteTodoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteTodo not implemented")
 }
-func (UnimplementedTodoServiceServer) mustEmbedUnimplementedTodoServiceServer() {}
-func (UnimplementedTodoServiceServer) testEmbeddedByValue()                     {}
+func (UnimplementedTodoServiceServer) testEmbeddedByValue() {}
 
 // UnsafeTodoServiceServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to TodoServiceServer will

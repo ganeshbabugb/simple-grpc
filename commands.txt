@@ -1,2 +1,0 @@
-go tool buf config init
-touch buf.gen.yaml

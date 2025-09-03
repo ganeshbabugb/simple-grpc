@@ -14,7 +14,7 @@ import (
 )
 
 type todoServer struct {
-	todov1.UnimplementedTodoServiceServer
+	// todov1.UnimplementedTodoServiceServer
 	mu    sync.Mutex
 	store map[string]*todov1.Todo
 }

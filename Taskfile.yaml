@@ -1,0 +1,36 @@
+version: "3"
+
+tasks:
+  # Task to generate Go code from proto files
+  gen-proto:
+    desc: "Generate Go code from proto files"
+    cmds:
+      - go tool buf generate --template buf.gen.yaml
+    silent: false
+
+  # Task to run the gRPC server
+  server:
+    desc: "Run gRPC server"
+    cmds:
+      - go run ./cmd/server
+    silent: false
+
+  # Task to run the gRPC client
+  client:
+    desc: "Run gRPC client"
+    cmds:
+      - go run ./cmd/client
+    silent: false
+
+  # Task to run both server and client (optional)
+  run:
+    desc: "Run server and client concurrently"
+    deps:
+      - gen-proto
+    cmds:
+      - echo "Starting server..."
+      - go run ./cmd/server &
+      - sleep 2 
+      - echo "Starting client..."
+      - go run ./cmd/client
+    silent: false
